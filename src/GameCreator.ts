@@ -2,9 +2,9 @@ import { Move } from "./Move"
 import { PlayerSymbol } from "./PlayerSymbols"
 
 export class GameCreator {
-    static readonly CELLS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    static readonly CELLS = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
-    private readonly _moves = new Array<Move>(9)
+    private readonly _moves = new Array<Move>(GameCreator.CELLS.length)
     private readonly _availableCells = new Set(GameCreator.CELLS)
     private _moveNumber = 0
 
@@ -13,7 +13,7 @@ export class GameCreator {
             return this._moves
         }
 
-        const currentCell = GameCreator.getRandomInt(10)
+        const currentCell = GameCreator.getRandomInt(GameCreator.CELLS.length)
         if (this._availableCells.has(currentCell)) {
             this._moves[this._moveNumber] = new Move(this._moveNumber, currentCell, this.getSymbol())
             this._moveNumber++
