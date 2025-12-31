@@ -18,8 +18,7 @@
     "build": "tsc",
     "run": "ts-node src/index.ts",
     "start": "node dist/index.js",
-    "generate": "ts-node src/scripts/generate-moves.ts",
-    "filter": "ts-node src/scripts/filter-unique-moves.ts",
+    "generate-moves": "ts-node src/scripts/generate-moves.ts",
     "read-moves": "ts-node src/scripts/read-moves.ts"
   },
   "devDependencies": {
