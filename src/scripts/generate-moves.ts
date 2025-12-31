@@ -1,8 +1,8 @@
 import { MovesGenerator } from "../MovesGenerator"
 import * as fs from 'fs';
 
-// After 1500000 the grow of the number of unique games starts to slow
-const gamesCount = 1500000
+// After 4000000 the grow of the number of unique games starts to slow
+const gamesCount = 4000000
 const movesSets = new Array<string>(gamesCount)
 for (let i = 0; i < movesSets.length; i++) {
     const generator = new MovesGenerator()

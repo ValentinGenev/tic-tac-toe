@@ -2,7 +2,7 @@ import { CellIndex } from "../model/CellIndex";
 import { GameReader } from "../GameReader";
 import * as fs from 'fs';
 
-const movesData: Array<CellIndex[]> = JSON.parse(fs.readFileSync('data/unique-moves.json', 'utf-8'))
+const movesData: Array<CellIndex[]> = JSON.parse(fs.readFileSync('data/moves.json', 'utf-8'))
 const gamesAsJson = new Array<string>(movesData.length)
 
 for (const i in movesData) {
