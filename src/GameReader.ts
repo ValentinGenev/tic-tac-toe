@@ -42,7 +42,7 @@ export class GameReader {
     }
 
     getGame(): (number | null)[] {
-        const meaningfulMoves = this._winningMove ? this._moves.slice(0, this._winningMove) : this._moves
+        const meaningfulMoves = this._winningMove ? this._moves.slice(0, this._winningMove + 1) : this._moves
         return [...meaningfulMoves, this._winner]
     }
 }
