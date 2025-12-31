@@ -16,4 +16,9 @@ going down a line of moves from the opposing player that might still be random.<
 The <b>second step</b> should be broken down into steps that choose winning
 against opponent that also tries to win OR some other criteria.</i>
 
+<i>If perfect play means that <b>Player 2<b> can only play for <b>draw</b> then
+I can discard all games where Player 2 has won.<br>
+But then, will Player 2 ever play for winning? How do I take this in
+consideration that?</i>
+
 ahhh...
