@@ -1,13 +1,13 @@
-import { GameCreator } from "./GameCreator";
-import { CellIndex } from "./CellIndex";
+import { CellIndex } from "./model/CellIndex";
 import * as fs from 'fs';
 
-const gamesCount = 100
-const movesDatabase = new Array<CellIndex[]>(gamesCount)
-for (let i = 0; i < movesDatabase.length; i++) {
-    const creator = new GameCreator()
-    movesDatabase[i] = creator.createRandomMove()
-}
+const games: Array<CellIndex[]> = JSON.parse(fs.readFileSync('database/moves.json', 'utf-8'))
+const gamesAsJson = new Array<string>(games.length)
 
-fs.mkdirSync('database', { recursive: true })
-fs.writeFileSync('database/moves.json', JSON.stringify(movesDatabase, null))
+for (const i in games) {
+    gamesAsJson[i] = JSON.stringify(games[i])
+}
+const uniqueGames = new Set<string>(gamesAsJson)
+
+console.log('DEBUG ---------------', games.length)
+console.log('DEBUG ---------------', uniqueGames.size)

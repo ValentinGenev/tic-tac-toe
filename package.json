@@ -18,7 +18,8 @@
     "build": "tsc",
     "run": "ts-node src/index.ts",
     "start": "node dist/index.js",
-    "watch": "npx nodemon --watch src --ext ts --exec ts-node src/index.ts"
+    "generate": "ts-node src/generate-moves.ts",
+    "filter": "ts-node src/filter-unique-moves"
   },
   "devDependencies": {
     "ts-node": "^10.9.2",
