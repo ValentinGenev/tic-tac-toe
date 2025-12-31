@@ -1,5 +1,4 @@
 import { CellIndex } from "./model/CellIndex";
-import { Game } from "./model/Game";
 import { PlayerSymbol } from "./model/PlayerSymbol";
 
 export class GameReader {
@@ -14,19 +13,21 @@ export class GameReader {
         [2, 4, 6]
     ]
 
+    private readonly _moves: CellIndex[]
     private readonly _winner: PlayerSymbol | null
-    private readonly _winningMoveNumber: number | null
+    private readonly _winningMove: number | null
 
-    constructor(private readonly _moves: CellIndex[]) {
+    constructor(moves: number[]) {
+        this._moves = moves
         this._winner = null
-        this._winningMoveNumber = null
+        this._winningMove = null
 
-        const movesByPlayer = this._moves.map((c, i) => ({ cell: c, player: this.getPlayer(i), move: i }))
+        const movesByPlayer = moves.map((c, i) => ({ cell: c, player: this.getPlayer(i), move: i }))
         for (const condition of this.WIN_CONDITIONS) {
-            const matches = movesByPlayer.filter((moves) => condition.indexOf(moves.cell) >= 0)
+            const matches = movesByPlayer.filter(m => condition.indexOf(m.cell) >= 0)
             if (matches.length === 3 && this.isSamePlayer(matches)) {
                 this._winner = matches[0].player
-                this._winningMoveNumber = matches[2].move
+                this._winningMove = matches[2].move
             }
         }
     }
@@ -40,11 +41,8 @@ export class GameReader {
         return moves.findIndex(m => m.player !== player) >= 0 ? false : true
     }
 
-    getGame(): Game {
-        return {
-            moves: this._moves,
-            winner: this._winner,
-            winningMoveNumber: this._winningMoveNumber
-        }
+    getGame(): (number | null)[] {
+        const meaningfulMoves = this._winningMove ? this._moves.slice(0, this._winningMove) : this._moves
+        return [...meaningfulMoves, this._winner]
     }
 }
