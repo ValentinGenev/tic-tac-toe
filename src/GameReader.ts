@@ -41,8 +41,9 @@ export class GameReader {
         return moves.findIndex(m => m.player !== player) >= 0 ? false : true
     }
 
-    getGame(): (number | null)[] {
+    getGame(): number[] {
         const meaningfulMoves = this._winningMove ? this._moves.slice(0, this._winningMove + 1) : this._moves
-        return [...meaningfulMoves, this._winner]
+        const winner = this._winner === null ? -1 : this._winner
+        return [...meaningfulMoves, winner]
     }
 }

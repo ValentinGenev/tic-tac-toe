@@ -3,7 +3,7 @@ import { GameReader } from "../GameReader";
 import * as fs from 'fs';
 
 const movesData: Array<CellIndex[]> = JSON.parse(fs.readFileSync('data/unique-moves.json', 'utf-8'))
-const games = new Array<(number | null)[]>(movesData.length)
+const games = new Array<number[]>(movesData.length)
 
 for (const i in movesData) {
     games[i] = new GameReader(movesData[i]).getGame()
