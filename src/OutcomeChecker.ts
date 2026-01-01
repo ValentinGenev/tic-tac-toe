@@ -33,7 +33,7 @@ export abstract class OutcomeChecker {
         return matches.sort((a, b) => a.winningMove - b.winningMove)[0]
     }
 
-    private static getPlayer(moveNumber: number) {
+    static getPlayer(moveNumber: number) {
         return moveNumber % 2 ? PlayerSymbol.O : PlayerSymbol.X
     }
 

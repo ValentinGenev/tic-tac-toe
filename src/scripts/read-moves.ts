@@ -2,11 +2,11 @@ import { CellIndex } from "../model/CellIndex";
 import { GameReader } from "../GameReader";
 import * as fs from 'fs';
 
-const movesData: Array<CellIndex[]> = JSON.parse(fs.readFileSync('data/moves.json', 'utf-8'))
-const gamesAsJson = new Array<string>(movesData.length)
+const movesSets: Array<CellIndex[]> = JSON.parse(fs.readFileSync('data/moves.json', 'utf-8'))
+const gamesAsJson = new Array<string>(movesSets.length)
 
-for (const i in movesData) {
-    gamesAsJson[i] = JSON.stringify(new GameReader(movesData[i]).getGame())
+for (const i in movesSets) {
+    gamesAsJson[i] = JSON.stringify(new GameReader(movesSets[i]).getGame())
 }
 const games = [...new Set(gamesAsJson)].map(g => JSON.parse(g))
 
