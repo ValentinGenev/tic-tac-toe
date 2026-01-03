@@ -1,8 +1,8 @@
 import { MovesGenerator } from "../MovesGenerator"
 import * as fs from 'fs';
 
-// After 4000000 the grow of the number of unique games starts to slow
-const gamesCount = 4000000
+// Somewhere between 4,000,000 and 5,000,000 the maximum games are reached 255,168
+const gamesCount = 5000000
 const movesSets = new Array<string>(gamesCount)
 for (let i = 0; i < movesSets.length; i++) {
     const generator = new MovesGenerator()
