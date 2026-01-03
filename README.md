@@ -1,10 +1,14 @@
 # tic-tac-toe
 
-How do I use the data I have?<br>
-Can I just filter the won games by move and is that going to be enough?<br>
-Are there corner cases and what happens then?
+## Ideas:
+1. Second player MUST always play for draw. (<i>Should Player 2 punish mistakes by human player? If it's a true-to-life bot it should!</i>)
+2. First player MUST start playing for draw after no chances to win are present
 
-Potential algorithm:
+<i>Now that I think more about this, it's easy to hardcode counter-play checks.
+Should I do it? When Should I rely on the generated data and when on hardcoded
+checks? Should I generate more games? Should I store defeats by player two?</i>
+
+## Potential algorithm:
 1. find games that match the current set of moves;
 2. get first won game from the results;
 

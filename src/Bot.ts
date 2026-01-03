@@ -1,5 +1,6 @@
 import { CellIndex } from "./model/CellIndex"
 import { PlayerSymbol } from "./model/PlayerSymbol"
+import { MovesGenerator } from "./MovesGenerator"
 import { OutcomeChecker } from "./OutcomeChecker"
 
 export class Bot {
@@ -10,6 +11,10 @@ export class Bot {
     }
 
     markCell(moves: number[] = []): CellIndex {
+        if (moves.length === 9) {
+            throw new Error("Can't make more moves.")
+        }
+
         const moveNumber = moves.length
         if (moveNumber === 0) {
             return this.getFirstCell(moveNumber)
@@ -23,7 +28,7 @@ export class Bot {
         const shortestWins = this._gamesByLength
             .filter(g => g.length === this._gamesByLength[0].length
                 && g[g.length - 1] === PlayerSymbol.X)
-        return shortestWins[this.getRandomInt(shortestWins.length)][moveNumber]
+        return shortestWins[MovesGenerator.getRandomInt(shortestWins.length)][moveNumber]
     }
 
     private getCell(moves: number[], moveNumber: number, winner: PlayerSymbol | -1) {
@@ -31,12 +36,18 @@ export class Bot {
         for (let i = 0; i < moveNumber; i++) {
             games = games.filter(g => g[i] === moves[i] && g[g.length - 1] === winner)
         }
-        // FIXME: sometimes we don't have any games, in this case we need to fill a random left cell
-        const game = games[this.getRandomInt(games.length)]
+
+        if (games.length === 0) {
+            return this.getRandomFreeCell(moves)
+        }
+
+        const game = games[MovesGenerator.getRandomInt(games.length)]
         return game[moveNumber]
     }
 
-    private getRandomInt(max: number) {
-        return Math.floor(Math.random() * max)
+    private getRandomFreeCell(moves: number[]) {
+        const availableCells = MovesGenerator.CELLS.filter(m => !moves.includes(m))
+        console.log('DEBUG ---------------', 'availableCells', availableCells)
+        return availableCells[MovesGenerator.getRandomInt(availableCells.length)]
     }
 }
