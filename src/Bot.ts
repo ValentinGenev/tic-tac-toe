@@ -7,6 +7,8 @@ export class Bot {
     private readonly _gamesByLength: Array<number[]>
 
     constructor(games: Array<number[]>) {
+        // FIXME: this is the only bit of coded game knowledge so far:
+        //  going for the shortest games first
         this._gamesByLength = [...games].sort((a, b) => a.length - b.length)
     }
 
@@ -16,47 +18,33 @@ export class Bot {
         }
 
         const moveNumber = moves.length
-        if (moveNumber === 0) {
-            return this.getFirstCell(moveNumber)
-        }
-
-        // TODO: figure out how to make Player 2 play for wins as well
-        const expectedOutcome = OutcomeChecker.getPlayer(moveNumber) === PlayerSymbol.O ? -1 : PlayerSymbol.X
-        return this.getCell(moves, moveNumber, expectedOutcome)
+        return this.getCell(moves, moveNumber, OutcomeChecker.getPlayer(moveNumber))
     }
 
-    private getFirstCell(moveNumber: number) {
-        const shortestWins = this._gamesByLength
-            .filter(g => g.length === this._gamesByLength[0].length
-                && g[g.length - 1] === PlayerSymbol.X)
-        return shortestWins[MovesGenerator.getRandomInt(shortestWins.length)][moveNumber]
-    }
-
-    private getCell(moves: number[], moveNumber: number, winner: PlayerSymbol | -1) {
+    private getCell(moves: number[], moveNumber: number, winner: PlayerSymbol) {
         let games = this._gamesByLength.filter(g => g.length >= moveNumber + 1)
         for (let i = 0; i < moveNumber; i++) {
             games = games.filter(g => g[i] === moves[i] && g[g.length - 1] === winner)
         }
 
-        // Start playing for the draw
         if (games.length === 0) {
             for (let i = 0; i < moveNumber; i++) {
                 games = games.filter(g => g[i] === moves[i] && g[g.length - 1] === -1)
             }
         }
 
-        // Wing it
         if (games.length === 0) {
+            // never reached but here just in case...
             return this.getRandomFreeCell(moves)
         }
 
-        const game = games[MovesGenerator.getRandomInt(games.length)]
+        const game = games[0]
         return game[moveNumber]
     }
 
     private getRandomFreeCell(moves: number[]) {
+        console.warn('WARN ---------------', "we're in Random World again...")
         const availableCells = MovesGenerator.CELLS.filter(m => !moves.includes(m))
-        console.log('DEBUG ---------------', 'availableCells', availableCells)
         return availableCells[MovesGenerator.getRandomInt(availableCells.length)]
     }
 }
