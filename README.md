@@ -13,12 +13,12 @@
 
 ## Goals
 1. No game knowledge should be part of the source code.
-2. Player 2 MUST play for win if Player 1 is human who doesn't play for win.
-3. Player 1 MUST never win.
+2. Bot 1 MUST play for a **win**.
+2. Bot 1 MUST never win.
 
-How do I make Player 2 play defense when Player 1 is playing "good" and punish
-incompetent plays otherwise?
+### Bonus
+1. Bot 2 MUST play for a **win** if a human is playing 'badly'.
 
-Doing simulation by going several games in per turn for both bot players?<br>
-<i>Knowing that the number of moves is always <= 9 we can do (9 - current move)
-simulations with OutcomeChecker.</i>
+## Questions
+- How do I make Bot 2 play defense when Bot 1 is playing "good" and punish incompetent plays otherwise?
+- Doing simulation by trying several games for up to 9 moves per turn for the bot players?
