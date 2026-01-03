@@ -11,8 +11,10 @@ const botMoves: number[] = []
 let outcome
 for (let i = 0; i < MAX_MOVES; i++) {
     if (i % 2 === 0) {
+        console.log('DEBUG ---------------', 'Player 1')
         botMoves.push(bot1.markCell(botMoves))
     } else {
+        console.log('DEBUG ---------------', 'Player 2')
         botMoves.push(bot2.markCell(botMoves))
     }
 

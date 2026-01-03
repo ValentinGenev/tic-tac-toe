@@ -20,6 +20,7 @@ export class Bot {
             return this.getFirstCell(moveNumber)
         }
 
+        // TODO: figure out how to make Player 2 play for wins as well
         const expectedOutcome = OutcomeChecker.getPlayer(moveNumber) === PlayerSymbol.O ? -1 : PlayerSymbol.X
         return this.getCell(moves, moveNumber, expectedOutcome)
     }
@@ -37,6 +38,14 @@ export class Bot {
             games = games.filter(g => g[i] === moves[i] && g[g.length - 1] === winner)
         }
 
+        // Start playing for the draw
+        if (games.length === 0) {
+            for (let i = 0; i < moveNumber; i++) {
+                games = games.filter(g => g[i] === moves[i] && g[g.length - 1] === -1)
+            }
+        }
+
+        // Wing it
         if (games.length === 0) {
             return this.getRandomFreeCell(moves)
         }
