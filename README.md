@@ -12,7 +12,7 @@
 |Draws|46,080|
 
 ## Goals
-1. Now game knowledge should be part of the source code.
+1. No game knowledge should be part of the source code.
 2. Player 2 MUST play for win if Player 1 is human who doesn't play for win.
 3. Player 1 MUST never win.
 
