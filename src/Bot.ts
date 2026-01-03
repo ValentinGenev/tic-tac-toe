@@ -7,9 +7,7 @@ export class Bot {
     private readonly _gamesByLength: Array<number[]>
 
     constructor(games: Array<number[]>) {
-        // FIXME: this is the only bit of coded game knowledge so far:
-        //  going for the shortest games first
-        this._gamesByLength = [...games].sort((a, b) => a.length - b.length)
+        this._gamesByLength = [...games]
     }
 
     markCell(moves: number[] = []): CellIndex {
@@ -34,11 +32,10 @@ export class Bot {
         }
 
         if (games.length === 0) {
-            // never reached but here just in case...
             return this.getRandomFreeCell(moves)
         }
 
-        const game = games[0]
+        const game = games[MovesGenerator.getRandomInt(games.length)]
         return game[moveNumber]
     }
 

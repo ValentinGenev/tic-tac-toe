@@ -4,9 +4,9 @@
 1. `npm run generate-moves` does 5mil cycles of random filling of game boards
 2. `npm run read-moves` gets the games of the moves
 
-| Outcome| Number of Games |
+|Outcome|Number of Games|
 |-|-|
-| Unique games (considering rotations and reflections)|255,168|
+|Unique games (considering rotations and reflections)|255,168|
 |Games won by the first player|131,184|
 |Games won by the second player|77,904|
 |Draws|46,080|

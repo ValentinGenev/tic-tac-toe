@@ -7,10 +7,10 @@ const games: Array<number[]> = JSON.parse(fs.readFileSync('data/games.json', 'ut
 
 const bot1 = new Bot(games)
 const bot2 = new Bot(games)
-let botMoves: number[] = []
-const wonGames = []
+const finishedGames = []
 
 for (let i = 0; i < 1000; i++) {
+    let botMoves: number[] = []
     for (let y = 0; y < MAX_MOVES; y++) {
         if (y % 2 === 0) {
             botMoves.push(bot1.markCell(botMoves))
@@ -19,12 +19,13 @@ for (let i = 0; i < 1000; i++) {
         }
 
         const outcome = OutcomeChecker.checkOutcome(botMoves)
-        if (outcome.winner != null) {
-            wonGames.push(outcome)
+        if (outcome.winner !== null) {
+            finishedGames.push(outcome)
+            console.log('DEBUG ---------------', 'botMoves', botMoves)
             break
         }
     }
-    botMoves = []
 }
 
-console.warn('WARN ---------------', `wonGames: ${wonGames.length}`, wonGames)
+console.warn('WARN ---------------', `Won by Player 1: ${finishedGames.filter(g => g.winner === 0).length}`)
+console.warn('WARN ---------------', `Won by Player 2: ${finishedGames.filter(g => g.winner === 1).length}`)
